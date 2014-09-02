@@ -1,4 +1,4 @@
-#+TITLE:    Zwenx's emacs.d file
+#+TITLE:    Justin's emacs.d file
 #+AUTHOR:   Justin Schiff
 #+EMAIL:    AmbientRevolution@gmail.com
 #+LANGUAGE: en
