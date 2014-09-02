@@ -196,9 +196,10 @@ First define the package archives and where they live.
 #+END_SRC
 
 ** Packages
-Define all the packages we are going to use. Note if you are viewing this table
-on github, the anchors will not take you anywhere. The anchors only work in
-emacs org mode.
+Define all the packages we are going to use.
+
+Note: Viewing this table on github, the anchors will not take you anywhere.
+The anchors only work in emacs org mode.
 
 #+tblname: my-packages
 |-----------------------+--------------------------------------------+----------|
