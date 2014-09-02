@@ -210,7 +210,7 @@ emacs org mode.
 | smex                  | recently and most frequently used commands | [[smex]]     |
 | w3m                   | web browser in emacs                       | [[w3m]]      |
 | undo-tree             | undo tree                                  | [[undo]]     |
-| auto-complete         | auto-completion extension for Emac         | [[autoc]]    |
+| auto-complete         | auto-completion extension for Emacs        | [[autoc]]    |
 | windresize            | arrow keys resize the window               |          |
 | clojure-mode          | Mode for clojure                           | [[clojure]]  |
 | cider                 | Clojure IDE and REPL for Emacs             | [[clojure]]  |
