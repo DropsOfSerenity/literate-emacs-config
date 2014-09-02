@@ -198,8 +198,8 @@ First define the package archives and where they live.
 ** Packages
 Define all the packages we are going to use.
 
-_Note: Viewing this table on github, the anchors will not take you anywhere.
-The anchors only work in emacs org mode._
+/Note: Viewing this table on github, the anchors will not take you anywhere./
+/The anchors only work in emacs org mode./
 
 #+tblname: my-packages
 |-----------------------+--------------------------------------------+----------|
