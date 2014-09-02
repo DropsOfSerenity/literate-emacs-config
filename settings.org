@@ -106,6 +106,16 @@ Always turn on whitespace mode
 (whitespace-mode t)
 #+END_SRC
 
+trim trailing etc whitespace
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'whitespace-cleanup)
+;; automatically clean up bad whitespace
+(setq whitespace-action '(auto-cleanup))
+;; only show bad whitespace
+(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+#+END_SRC
+
 Parentheses.
 
 #+BEGIN_SRC emacs-lisp
@@ -126,7 +136,7 @@ Interactively Do Things
 
 ** Org Mode Settings
 
-I'm generally new to org made and am taking these settings from: 
+I'm generally new to org made and am taking these settings from:
 https://raw.githubusercontent.com/julienchastang/dotemacs/master/settings.org
 
 Let's get the agenda going.
@@ -210,6 +220,7 @@ emacs org mode.
 | python-mode           | Python mode for emacs                      | [[python]]   |
 | py-autopep8           | Auto format emacs                          | [[python]]   |
 | ein                   | Emacs IPython Notebook                     | [[python]]   |
+| coffee-mode           | Coffee Support                             | [[coffee]]   |
 | exec-path-from-shell  | Make sure path is set properly             |          |
 | jedi                  | Python auto-completion for Emacs           | [[python]]   |
 |-----------------------+--------------------------------------------+----------|
@@ -230,6 +241,9 @@ Download the packages we need.
 
 #+BEGIN_SRC emacs-lisp
 (global-git-gutter-mode t)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+
 #+END_SRC
 
 *** Fill Column Indicator
@@ -246,10 +260,10 @@ nil
 (powerline-default-theme)
 (set-face-background 'mode-line "#FF8700")
 (set-face-foreground 'mode-line "#870000")
- 
+
 (set-face-background 'powerline-active1 "#373b41")
 (set-face-foreground 'powerline-active1 "#dcdcdc")
- 
+
 (set-face-background 'powerline-active2 "#282a2e")
 (set-face-foreground 'powerline-active2 "#dcdcdc")
 
@@ -260,7 +274,7 @@ nil
 #+NAME: paren
 
 **** Smartparens
-    
+
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;
 ;; global
@@ -352,9 +366,9 @@ nil
 
 *** Smex
 #+NAME: smex
-    
+
 #+BEGIN_SRC emacs-lisp
-(smex-initialize) 
+(smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
@@ -368,14 +382,23 @@ nil
 #+BEGIN_SRC emacs-lisp
 (global-undo-tree-mode)
 #+END_SRC
-    
+
 *** Auto-Complete
 #+NAME: autoc
 
 #+BEGIN_SRC emacs-lisp
 (ac-config-default)
 #+END_SRC
-    
+
+*** Coffeescript
+#+NAME: coffee
+
+Tab space of 4 (i may want to change this to 2 eventually)
+
+#+BEGIN_SRC emacs-lisp
+(custom-set-variables '(coffee-tab-width 4))
+#+END_SRC
+
 *** exec-path-from-shell
 
 Ensure that my environment variables from shell are copied over to emacs
