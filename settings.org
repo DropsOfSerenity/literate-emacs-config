@@ -204,6 +204,7 @@ emacs org mode.
 |-----------------------+--------------------------------------------+----------|
 | package               | description                                | anchors  |
 |-----------------------+--------------------------------------------+----------|
+| exec-path-from-shell  | Make sure path is set properly             |          |
 | magit                 | emacs git client                           | [[git]]      |
 | git-gutter            | git gutter                                 | [[git]]      |
 | fill-column-indicator | 80 column rule                             | [[fci]]      |
@@ -217,9 +218,8 @@ emacs org mode.
 | python-mode           | Python mode for emacs                      | [[python]]   |
 | py-autopep8           | Auto format emacs                          | [[python]]   |
 | ein                   | Emacs IPython Notebook                     | [[python]]   |
-| coffee-mode           | Coffee Support                             | [[coffee]]   |
-| exec-path-from-shell  | Make sure path is set properly             |          |
 | jedi                  | Python auto-completion for Emacs           | [[python]]   |
+| coffee-mode           | Coffee Support                             | [[coffee]]   |
 |-----------------------+--------------------------------------------+----------|
 
 Download the packages we need. Heres the breakdown, by reading the table
