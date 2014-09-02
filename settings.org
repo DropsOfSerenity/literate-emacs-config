@@ -225,7 +225,15 @@ emacs org mode.
 | jedi                  | Python auto-completion for Emacs           | [[python]]   |
 |-----------------------+--------------------------------------------+----------|
 
-Download the packages we need.
+Download the packages we need. Heres the breakdown, by reading the table
+it gives it to us in a list of rows e.g
+`(("package" "description" "anchors") ("sample" "description" "anchor"))`
+
+First we want to get rid of the title so we take the cdr. Then we map car
+across each function of the list in order to get the first element
+which is basically the package name as a string. Lastly for each of these
+elements we map the intern function to it which turns them from strings
+into symbols, allowing us to pass the result into install-packages
 
 #+BEGIN_SRC emacs-lisp :var packs=my-packages :hlines no
 (defvar install-packages (mapcar 'intern (mapcar 'car (cdr packs))))
