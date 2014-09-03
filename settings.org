@@ -152,6 +152,8 @@ Code blocks should be have syntax highlighting
 
 #+BEGIN_SRC emacs-lisp
 (setq org-src-fontify-natively t)
+;; code blocks should also not be indented additionally
+(setq org-edit-src-content-indentation 0)
 #+END_SRC
 
 Loading babel supported languages:
@@ -159,8 +161,8 @@ Loading babel supported languages:
 #+BEGIN_SRC emacs-lisp
 (org-babel-do-load-languages
  'org-babel-load-languages
-  '((python . t)
-     (emacs-lisp . t)))
+ '((python . t)
+   (emacs-lisp . t)))
 #+END_SRC
 ** Package Archives
 
@@ -224,25 +226,17 @@ Define all the packages we are going to use.
 | coffee-mode           | Coffee Support                             | [[coffee]]   |
 |-----------------------+--------------------------------------------+----------|
 
-Download the packages we need. Heres the breakdown, by reading the table
-it gives it to us in a list of rows e.g
-`(("package" "description" "anchors") ("sample" "description" "anchor"))`
-
-First we want to get rid of the title so we take the cdr. Then we map car
-across each function of the list in order to get the first element
-which is basically the package name as a string. Lastly for each of these
-elements we map the intern function to it which turns them from strings
-into symbols storing the list of symbols in install-packages.
-
-Then we can run package-install on any packages that are not already
-installed.
+Download the packages.
 
 #+BEGIN_SRC emacs-lisp :var packs=my-packages :hlines no
+;; packs is the my-packages table, convert this to a list of package
+;; symbols that correspond to first column
 (defvar install-packages (mapcar 'intern (mapcar 'car (cdr packs))))
 
+;; for each package install package
 (dolist (pack install-packages)
-   (unless (package-installed-p pack)
-     (package-install pack)))
+  (unless (package-installed-p pack)
+    (package-install pack)))
 #+END_SRC
 
 ** Package Configuration
@@ -253,7 +247,6 @@ installed.
 (global-git-gutter-mode t)
 
 (global-set-key (kbd "C-x g") 'magit-status)
-
 #+END_SRC
 
 *** Fill Column Indicator
