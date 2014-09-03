@@ -148,15 +148,10 @@ necessary.
 
 #+begin_src emacs-lisp
 (defun filter (condp lst)
-  "filter LST given a function CONDP removing any elements
-where condp returns nil"
+  "filter LST given a conditional function CONDP removing
+any elements where condp returns nil"
   (delq nil
-        (mapcar
-         (lambda (x)
-           ;; interesting using and here, evals all arguments until
-           ;; one returns nil, then returns nil, otherwise if none
-           ;; of them returns nil, returns the last element, in this
-           (and (funcall condp x) x)) lst)))
+        (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 #+end_src
 
 
