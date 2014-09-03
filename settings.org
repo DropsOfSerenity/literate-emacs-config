@@ -215,6 +215,7 @@ Define all the packages we are going to use.
 | smex                  | recently and most frequently used commands | [[smex]]     |
 | undo-tree             | undo tree                                  | [[undo]]     |
 | auto-complete         | auto-completion extension for Emacs        | [[autoc]]    |
+| yasnippet             | Snippet Completation                       | [[yas]]      |
 | windresize            | arrow keys resize the window               |          |
 | python-mode           | Python mode for emacs                      | [[python]]   |
 | py-autopep8           | Auto format emacs                          | [[python]]   |
@@ -397,6 +398,13 @@ nil
 
 #+BEGIN_SRC emacs-lisp
 (ac-config-default)
+#+END_SRC
+
+*** Yasnippet
+#+NAME: yas
+
+#+BEGIN_SRC emacs-lisp
+(yas-global-mode 1)
 #+END_SRC
 
 *** Coffeescript
