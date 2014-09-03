@@ -43,6 +43,13 @@ No startup message needed.
 (setq inhibit-startup-message t)
 #+END_SRC
 
+Act like a regular selection when I have things selected
+e.g typing will replace selection rather than appending after
+
+#+begin_src emacs-lisp
+(delete-selection-mode t)
+#+end_src
+
 UTF-8 is king.
 
 #+BEGIN_SRC emacs-lisp
@@ -154,6 +161,30 @@ any elements where condp returns nil"
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 #+end_src
 
+** Custom Editing Functions
+
+Custom Editing functions that I've written to help me edit.
+
+#+begin_src emacs-lisp :tangle yes
+(defun comment-or-uncomment-region-or-line ()
+  "extends comment-or-uncommend-region to commend
+line if there is no selection"
+  (interactive)
+  (let (beg end)
+    (if (region-active-p) ; if we have an active mark
+        (setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
+(global-set-key (kbd "C-x /") 'comment-or-uncomment-region-or-line)
+
+(defun eval-and-replace-sexp ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (prin1 (eval (read (current-kill 0)))
+         (current-buffer)))
+(global-set-key (kbd "C-c C-e") 'eval-and-replace-sexp)
+#+end_src
 
 ** Org Mode Settings
 
@@ -237,6 +268,7 @@ Define all the packages we are going to use.
 | auto-complete         | auto-completion extension for Emacs        | [[autoc]]    |
 | yasnippet             | Snippet Completation                       | [[yas]]      |
 | windresize            | arrow keys resize the window               |          |
+| multiple-cursors      | Sublime Style Multiple Cursors             | [[mc]]       |
 | python-mode           | Python mode for emacs                      | [[python]]   |
 | py-autopep8           | Auto format emacs                          | [[python]]   |
 | ein                   | Emacs IPython Notebook                     | [[python]]   |
@@ -417,6 +449,21 @@ nil
 #+BEGIN_SRC emacs-lisp
 (yas-global-mode 1)
 #+END_SRC
+
+*** Multiple Cursors
+
+Multiple Cursors Keybinds
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; Unbind meta-mouse1 and bind add cursor to it
+(global-unset-key (kbd "M-<down-mouse-1>"))
+(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+#+end_src
 
 *** Coffeescript
 #+NAME: coffee
