@@ -137,6 +137,29 @@ Interactively Do Things
 (ido-mode t)
 #+END_SRC
 
+** Custom Helper Functions
+
+These are custom helper functions that I may or may not use later
+to provide elisp with some things that I deem are needed to be added
+
+In the future I may want to consider using dash.el as it provides a
+of utility functions, I should endeavor to find a use for it if
+necessary.
+
+#+begin_src emacs-lisp
+(defun filter (condp lst)
+  "filter LST given a function CONDP removing any elements
+where condp returns nil"
+  (delq nil
+        (mapcar
+         (lambda (x)
+           ;; interesting using and here, evals all arguments until
+           ;; one returns nil, then returns nil, otherwise if none
+           ;; of them returns nil, returns the last element, in this
+           (and (funcall condp x) x)) lst)))
+#+end_src
+
+
 ** Org Mode Settings
 
 I'm generally new to org made and am taking these settings from:
