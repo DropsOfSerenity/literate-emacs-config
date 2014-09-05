@@ -165,7 +165,7 @@ any elements where condp returns nil"
 
 Custom Editing functions that I've written to help me edit.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (defun comment-or-uncomment-region-or-line ()
   "extends comment-or-uncommend-region to commend
 line if there is no selection"
@@ -268,11 +268,15 @@ Define all the packages we are going to use.
 | auto-complete         | auto-completion extension for Emacs        | [[autoc]]    |
 | yasnippet             | Snippet Completation                       | [[yas]]      |
 | windresize            | arrow keys resize the window               |          |
+| projectile            | Project Management                         | [[project]]  |
+| grizzl                | Fuzzy Search Utils                         |          |
 | multiple-cursors      | Sublime Style Multiple Cursors             | [[mc]]       |
 | python-mode           | Python mode for emacs                      | [[python]]   |
 | py-autopep8           | Auto format emacs                          | [[python]]   |
 | ein                   | Emacs IPython Notebook                     | [[python]]   |
 | jedi                  | Python auto-completion for Emacs           | [[python]]   |
+| flycheck              | Modern Syntax Checker                      | [[flycheck]] |
+| flycheck-pyflakes     | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode           | Coffee Support                             | [[coffee]]   |
 |-----------------------+--------------------------------------------+----------|
 
@@ -450,6 +454,23 @@ nil
 (yas-global-mode 1)
 #+END_SRC
 
+*** Projectile
+#+name: projectile
+
+#+begin_src emacs-lisp
+;; enable projectile globally
+(projectile-global-mode)
+
+;; grizzl mode for better fuzzy matching
+(setq projectile-completion-system 'grizzl)
+
+;; some keybinds
+(define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+(define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+(define-key projectile-mode-map [?\s-f] 'projectile-find-file)
+(define-key projectile-mode-map [?\s-g] 'projectile-grep)
+#+end_src
+
 *** Multiple Cursors
 
 Multiple Cursors Keybinds
@@ -498,3 +519,21 @@ Ensure that my environment variables from shell are copied over to emacs
 (require 'py-autopep8)
 (add-hook 'before-save-hook 'py-autopep8-before-save)
 #+END_SRC
+*** Javascript
+
+Javascript confs
+
+#+begin_src emacs-lisp
+(require 'flycheck)
+(add-hook 'js-mode-hook
+          (lambda () (flycheck-mode t)))
+#+end_src
+
+*** Flycheck
+#+name: flycheck
+
+Syntax Checker enable
+
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook #'global-flycheck-mode)
+#+end_src
