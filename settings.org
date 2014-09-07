@@ -387,12 +387,21 @@ Autopair mode settings
 ;; enable autopair in all buffers
 (autopair-global-mode)
 
+(add-hook 'web-mode-hook
+           #'(lambda ()
+               (setq autopair-dont-activate t) ;; for emacsen < 24
+               (autopair-mode -1))             ;; for emacsen >= 24
+)
+
 ;; handle triple quotes in python
 (add-hook 'python-mode-hook
           #'(lambda ()
               (setq autopair-handle-action-fns
                     (list #'autopair-default-handle-action
                           #'autopair-python-triple-quote-action))))
+
+;; no blinking please
+(setq autopair-blink nil)
 #+end_src
 
 *** Smex
@@ -446,6 +455,7 @@ Autopair mode settings
 #+end_src
 
 *** Multiple Cursors
+#+name: mc
 
 Multiple Cursors Keybinds
 
@@ -475,9 +485,6 @@ is already marked"
 (global-set-key (kbd "s-d") 'mark-word-or-select-next)
 
 #+end_src
-
-#+RESULTS:
-: mark-word-or-select-next
 
 *** Coffeescript
 #+NAME: coffee
