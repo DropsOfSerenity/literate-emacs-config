@@ -307,7 +307,7 @@ Define all the packages we are going to use.
 | magit                | emacs git client                           | [[git]]      |
 | git-gutter           | git gutter                                 | [[git]]      |
 | powerline            | A better mode line                         | [[modeline]] |
-| smartparens          | Smart paren pairs                          | [[paren]]    |
+| autopair             | Autopair for parenthesis                   | [[parens]]   |
 | smex                 | recently and most frequently used commands | [[smex]]     |
 | undo-tree            | undo tree                                  | [[undo]]     |
 | auto-complete        | auto-completion extension for Emacs        | [[autoc]]    |
@@ -378,27 +378,23 @@ Documentation using Dash for OSX
 (powerline-reset)
 #+END_SRC
 
-*** Parentheses
-#+NAME: paren
+*** Parenthesis
+#+NAME: parens
 
-**** Smartparens
+Autopair mode settings
 
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;
-;; global
-(smartparens-global-mode t)
+#+begin_src emacs-lisp
+;; enable autopair in all buffers
+(autopair-global-mode)
 
-;; highlights matching pairs
-(show-smartparens-global-mode t)
+;; handle triple quotes in python
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (setq autopair-handle-action-fns
+                    (list #'autopair-default-handle-action
+                          #'autopair-python-triple-quote-action))))
+#+end_src
 
-;;; html-mode
-(sp-with-modes '(html-mode sgml-mode)
-  (sp-local-pair "<" ">"))
-
-;;; lisp modes
-(sp-with-modes sp--lisp-modes
-  (sp-local-pair "(" nil :bind "C-("))
-#+END_SRC
 *** Smex
 #+NAME: smex
 
