@@ -308,7 +308,6 @@ Define all the packages we are going to use.
 | git-gutter           | git gutter                                 | [[git]]      |
 | powerline            | A better mode line                         | [[modeline]] |
 | smartparens          | Smart paren pairs                          | [[paren]]    |
-| rainbow-delimiters   | rainbow parentheses                        | [[paren]]    |
 | smex                 | recently and most frequently used commands | [[smex]]     |
 | undo-tree            | undo tree                                  | [[undo]]     |
 | auto-complete        | auto-completion extension for Emacs        | [[autoc]]    |
@@ -325,6 +324,7 @@ Define all the packages we are going to use.
 | jedi                 | Python auto-completion for Emacs           | [[python]]   |
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
+| web-mode             | Multiple Modes in HTML                     | [[html]]     |
 |----------------------+--------------------------------------------+----------|
 
 Download the packages.
@@ -399,11 +399,6 @@ Documentation using Dash for OSX
 (sp-with-modes sp--lisp-modes
   (sp-local-pair "(" nil :bind "C-("))
 #+END_SRC
-**** Rainbow Delimiters
-#+BEGIN_SRC emacs-lisp
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-#+END_SRC
-
 *** Smex
 #+NAME: smex
 
@@ -533,9 +528,41 @@ Syntax Checker enable
 (add-hook 'after-init-hook #'global-flycheck-mode)
 #+end_src
 *** HTML
+#+name: html
 
 HTML indentation set to 4
 
 #+begin_src emacs-lisp
 (setq sgml-basic-offset 4)
+#+end_src
+
+Web Mode for HTML
+
+#+begin_src emacs-lisp
+;; List of modes I may possible want to use web-mode in
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;; No extra first indent padding on script and style tags
+(setq web-mode-style-padding 0)
+(setq web-mode-script-padding 0)
+
+;; 4 space indent across the board
+(setq web-mode-markup-indent-offset 4)
+(setq web-mode-css-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
+
+;; highlight closing element
+(setq web-mode-enable-current-element-highlight t)
+
+;; if i decide to use auto-complete add the appropriate sources
+(setq web-mode-ac-sources-alist
+  '(("css" . (ac-source-css-property))
+    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
 #+end_src
