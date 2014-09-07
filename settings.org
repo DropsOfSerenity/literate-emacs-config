@@ -302,13 +302,11 @@ Define all the packages we are going to use.
 | windresize           | arrow keys resize the window               |          |
 | projectile           | Project Management                         | [[project]]  |
 | dart-mode            | Dart Mode                                  | [[dart]]     |
+| flycheck             | Modern Syntax Checker                      | [[flycheck]] |
 | grizzl               | Fuzzy Search Utils                         |          |
 | multiple-cursors     | Sublime Style Multiple Cursors             | [[mc]]       |
-| python-mode          | Python mode for emacs                      | [[python]]   |
-| python-pep8          | PEP8 compliance                            | [[python]]   |
 | ein                  | Emacs IPython Notebook                     | [[python]]   |
 | jedi                 | Python auto-completion for Emacs           | [[python]]   |
-| flycheck             | Modern Syntax Checker                      | [[flycheck]] |
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
 |----------------------+--------------------------------------------+----------|
