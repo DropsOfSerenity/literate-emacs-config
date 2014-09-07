@@ -259,7 +259,6 @@ Define all the packages we are going to use.
 | exec-path-from-shell  | Make sure path is set properly             |          |
 | magit                 | emacs git client                           | [[git]]      |
 | git-gutter            | git gutter                                 | [[git]]      |
-| fill-column-indicator | 80 column rule                             | [[fci]]      |
 | powerline             | A better mode line                         | [[modeline]] |
 | smartparens           | Smart paren pairs                          | [[paren]]    |
 | rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
@@ -301,13 +300,6 @@ Download the packages.
 (global-git-gutter-mode t)
 
 (global-set-key (kbd "C-x g") 'magit-status)
-#+END_SRC
-
-*** Fill Column Indicator
-#+NAME: fci
-
-#+BEGIN_SRC emacs-lisp
-nil
 #+END_SRC
 
 *** Mode line
