@@ -253,31 +253,31 @@ Define all the packages we are going to use.
 /The anchors only work in emacs org mode./
 
 #+tblname: my-packages
-|-----------------------+--------------------------------------------+----------|
-| package               | description                                | anchors  |
-|-----------------------+--------------------------------------------+----------|
-| exec-path-from-shell  | Make sure path is set properly             |          |
-| magit                 | emacs git client                           | [[git]]      |
-| git-gutter            | git gutter                                 | [[git]]      |
-| powerline             | A better mode line                         | [[modeline]] |
-| smartparens           | Smart paren pairs                          | [[paren]]    |
-| rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
-| smex                  | recently and most frequently used commands | [[smex]]     |
-| undo-tree             | undo tree                                  | [[undo]]     |
-| auto-complete         | auto-completion extension for Emacs        | [[autoc]]    |
-| yasnippet             | Snippet Completation                       | [[yas]]      |
-| windresize            | arrow keys resize the window               |          |
-| projectile            | Project Management                         | [[project]]  |
-| grizzl                | Fuzzy Search Utils                         |          |
-| multiple-cursors      | Sublime Style Multiple Cursors             | [[mc]]       |
-| python-mode           | Python mode for emacs                      | [[python]]   |
-| py-autopep8           | Auto format emacs                          | [[python]]   |
-| ein                   | Emacs IPython Notebook                     | [[python]]   |
-| jedi                  | Python auto-completion for Emacs           | [[python]]   |
-| flycheck              | Modern Syntax Checker                      | [[flycheck]] |
-| flycheck-pyflakes     | Pyflakes support for flycheck              | [[python]]   |
-| coffee-mode           | Coffee Support                             | [[coffee]]   |
-|-----------------------+--------------------------------------------+----------|
+|----------------------+--------------------------------------------+----------|
+| package              | description                                | anchors  |
+|----------------------+--------------------------------------------+----------|
+| exec-path-from-shell | Make sure path is set properly             |          |
+| magit                | emacs git client                           | [[git]]      |
+| git-gutter           | git gutter                                 | [[git]]      |
+| powerline            | A better mode line                         | [[modeline]] |
+| smartparens          | Smart paren pairs                          | [[paren]]    |
+| rainbow-delimiters   | rainbow parentheses                        | [[paren]]    |
+| smex                 | recently and most frequently used commands | [[smex]]     |
+| undo-tree            | undo tree                                  | [[undo]]     |
+| auto-complete        | auto-completion extension for Emacs        | [[autoc]]    |
+| yasnippet            | Snippet Completation                       | [[yas]]      |
+| windresize           | arrow keys resize the window               |          |
+| projectile           | Project Management                         | [[project]]  |
+| grizzl               | Fuzzy Search Utils                         |          |
+| multiple-cursors     | Sublime Style Multiple Cursors             | [[mc]]       |
+| python-mode          | Python mode for emacs                      | [[python]]   |
+| python-pep8          | PEP8 compliance                            | [[python]]   |
+| ein                  | Emacs IPython Notebook                     | [[python]]   |
+| jedi                 | Python auto-completion for Emacs           | [[python]]   |
+| flycheck             | Modern Syntax Checker                      | [[flycheck]] |
+| flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
+| coffee-mode          | Coffee Support                             | [[coffee]]   |
+|----------------------+--------------------------------------------+----------|
 
 Download the packages.
 
@@ -503,13 +503,6 @@ Ensure that my environment variables from shell are copied over to emacs
 ;; autocomplete with Jedi
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'ein:connect-mode-hook 'ein:jedi-setup)
-
-;; fill column indicator for python files
-(add-hook 'python-mode-hook 'fci-mode)
-
-;; auto pep8
-(require 'py-autopep8)
-(add-hook 'before-save-hook 'py-autopep8-before-save)
 #+END_SRC
 *** Javascript
 
