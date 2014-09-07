@@ -325,6 +325,7 @@ Define all the packages we are going to use.
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
 | web-mode             | Multiple Modes in HTML                     | [[html]]     |
+| highlight-symbol     | Highlight multiple variable occurences     | [[hl]]     |
 |----------------------+--------------------------------------------+----------|
 
 Download the packages.
@@ -568,4 +569,17 @@ Web Mode for HTML
 (setq web-mode-ac-sources-alist
   '(("css" . (ac-source-css-property))
     ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+#+end_src
+*** Highlight Symbol
+#+name: hl
+
+Highlight matching symbols on given modes
+
+#+begin_src emacs-lisp
+(highlight-symbol-nav-mode)
+
+(add-hook 'prog-mode-hook (lambda () (highlight-symbol-mode)))
+(add-hook 'org-mode-hook (lambda () (highlight-symbol-mode)))
+(add-hook 'python-mode-hook (lambda () (highlight-symbol-mode)))
+(setq highlight-symbol-on-navigation-p t)
 #+end_src
