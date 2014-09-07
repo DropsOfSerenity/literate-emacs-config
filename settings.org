@@ -320,12 +320,13 @@ Define all the packages we are going to use.
 | dash-at-point        | Documentation using dash.                  | [[dash]]     |
 | expand-region        | Expand selection                           |          |
 | multiple-cursors     | Sublime Style Multiple Cursors             | [[mc]]       |
+| elpy                 | Emacs Lisp Python Environment              | [[python]]   |
 | ein                  | Emacs IPython Notebook                     | [[python]]   |
 | jedi                 | Python auto-completion for Emacs           | [[python]]   |
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
 | web-mode             | Multiple Modes in HTML                     | [[html]]     |
-| highlight-symbol     | Highlight multiple variable occurences     | [[hl]]     |
+| highlight-symbol     | Highlight multiple variable occurences     | [[hl]]       |
 |----------------------+--------------------------------------------+----------|
 
 Download the packages.
@@ -428,7 +429,11 @@ Autopair mode settings
 #+NAME: autoc
 
 #+BEGIN_SRC emacs-lisp
-(ac-config-default)
+;; (ac-config-default)
+;; (setq ac-auto-show-menu nil)
+
+;; company mode for all
+(add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
 
 *** Yasnippet
@@ -510,9 +515,16 @@ Ensure that my environment variables from shell are copied over to emacs
 
 #+BEGIN_SRC emacs-lisp
 ;; autocomplete with Jedi
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'ein:connect-mode-hook 'ein:jedi-setup)
+;;(add-hook 'python-mode-hook 'jedi:setup)
+;;(add-hook 'ein:connect-mode-hook 'ein:jedi-setup)
 #+END_SRC
+
+we're using elpy as a frontend for jedi
+
+#+begin_src emacs-lisp
+(elpy-enable)
+#+end_src
+
 *** Javascript
 
 Javascript confs
