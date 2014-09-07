@@ -35,7 +35,7 @@ These are general settings that do not need any third party packages at all.
 
 First change the colorscheme to a default I like.
 #+BEGIN_SRC emacs-lisp
-(load-theme 'deeper-blue)
+;; (load-theme 'deeper-blue)
 #+END_SRC
 
 No startup message needed.
@@ -165,6 +165,14 @@ Interactively Do Things
 (ido-mode t)
 #+END_SRC
 
+#+begin_src emacs-lisp
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-up-aggressively 0
+      scroll-down-aggressively 0
+      scroll-preserve-screen-position 1)
+#+end_src
+
 ** Custom Helper Functions
 
 These are custom helper functions that I may or may not use later
@@ -235,6 +243,8 @@ Code blocks should be have syntax highlighting
 (setq org-src-fontify-natively t)
 ;; code blocks should also not be indented additionally
 (setq org-edit-src-content-indentation 0)
+;;RET follows hyperlinks in org-mode:
+(setq org-return-follows-link t)
 #+END_SRC
 
 Loading babel supported languages:
@@ -309,6 +319,7 @@ Define all the packages we are going to use.
 | jedi                 | Python auto-completion for Emacs           | [[python]]   |
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
+| molokai-theme        | preferred theme                            | [[theme]]    |
 |----------------------+--------------------------------------------+----------|
 
 Download the packages.
@@ -553,4 +564,11 @@ Syntax Checker enable
 
 #+begin_src emacs-lisp
 (add-hook 'after-init-hook #'global-flycheck-mode)
+#+end_src
+*** Theming
+
+Load my preferred theme
+
+#+begin_src emacs-lisp
+(load-theme 'molokai)
 #+end_src
