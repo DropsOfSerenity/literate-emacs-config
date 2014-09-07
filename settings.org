@@ -167,6 +167,8 @@ Interactively Do Things
 (ido-mode t)
 #+END_SRC
 
+Why always the harsh scrolling?
+
 #+begin_src emacs-lisp
 (setq scroll-margin 0
       scroll-conservatively 100000
@@ -206,7 +208,7 @@ line if there is no selection"
         (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
-(global-set-key (kbd "C-x /") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
 (defun eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
