@@ -46,7 +46,9 @@ No startup message needed.
 No backups please.
 
 #+begin_src emacs-lisp
+;; stop creating backup~ files
 (setq make-backup-files nil)
+;; stop creating #autosave# files
 (setq auto-save-default nil)
 #+end_src
 
@@ -56,7 +58,6 @@ Turn off the fringe.
 (fringe-mode 0)
 (set-fringe-style -1)
 #+end_src
-
 
 Act like a regular selection when I have things selected
 e.g typing will replace selection rather than appending after
@@ -96,6 +97,11 @@ No menu bars, scrolls bars, etc.
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (blink-cursor-mode -1)
+
+(setq initial-frame-alist
+      '((menu-bar-lines . 0)
+        (tool-bar-lines . 0)))
+
 #+END_SRC
 
 Fill column at 80, default tab width 4
@@ -201,6 +207,17 @@ line if there is no selection"
 (global-set-key (kbd "C-c C-e") 'eval-and-replace-sexp)
 #+end_src
 
+Open new line below on C-<return>
+
+#+begin_src emacs-lisp
+(defun new-line-below ()
+  (interactive)
+  (move-end-of-line 1)
+  (newline-and-indent))
+
+(global-set-key (kbd "C-<return>") 'new-line-below)
+#+end_src
+
 ** Org Mode Settings
 
 I'm generally new to org made and am taking these settings from:
@@ -245,8 +262,9 @@ First define the package archives and where they live.
 ;; define some package archives
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-  '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; marmalade is slow as shit atm..
+;; (add-to-list 'package-archives
+;;   '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 (package-refresh-contents)
 
@@ -283,6 +301,7 @@ Define all the packages we are going to use.
 | yasnippet            | Snippet Completation                       | [[yas]]      |
 | windresize           | arrow keys resize the window               |          |
 | projectile           | Project Management                         | [[project]]  |
+| dart-mode            | Dart Mode                                  | [[dart]]     |
 | grizzl               | Fuzzy Search Utils                         |          |
 | multiple-cursors     | Sublime Style Multiple Cursors             | [[mc]]       |
 | python-mode          | Python mode for emacs                      | [[python]]   |
