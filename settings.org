@@ -43,6 +43,21 @@ No startup message needed.
 (setq inhibit-startup-message t)
 #+END_SRC
 
+No backups please.
+
+#+begin_src emacs-lisp
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+#+end_src
+
+Turn off the fringe.
+
+#+begin_src emacs-lisp
+(fringe-mode 0)
+(set-fringe-style -1)
+#+end_src
+
+
 Act like a regular selection when I have things selected
 e.g typing will replace selection rather than appending after
 
