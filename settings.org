@@ -110,7 +110,7 @@ Fill column at 80, default tab width 4
 
 #+BEGIN_SRC emacs-lisp
 (setq-default fill-column 80)
-(setq-default default-tab-width 2)
+(setq-default default-tab-width 4)
 ;; never use tab characters for indentation
 (setq-default indent-tabs-mode nil)
 #+END_SRC
