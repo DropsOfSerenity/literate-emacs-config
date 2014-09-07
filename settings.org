@@ -35,7 +35,7 @@ These are general settings that do not need any third party packages at all.
 
 First change the colorscheme to a default I like.
 #+BEGIN_SRC emacs-lisp
-;; (load-theme 'deeper-blue)
+(load-theme 'deeper-blue)
 #+END_SRC
 
 No startup message needed.
@@ -101,6 +101,8 @@ No menu bars, scrolls bars, etc.
 (setq initial-frame-alist
       '((menu-bar-lines . 0)
         (tool-bar-lines . 0)))
+
+(toggle-frame-fullscreen)
 
 #+END_SRC
 
@@ -319,7 +321,6 @@ Define all the packages we are going to use.
 | jedi                 | Python auto-completion for Emacs           | [[python]]   |
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
-| molokai-theme        | preferred theme                            | [[theme]]    |
 |----------------------+--------------------------------------------+----------|
 
 Download the packages.
@@ -343,6 +344,8 @@ Download the packages.
 (global-git-gutter-mode t)
 
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(setq magit-status-buffer-switch-function 'switch-to-buffer)
 #+END_SRC
 
 *** Mode line
@@ -565,10 +568,10 @@ Syntax Checker enable
 #+begin_src emacs-lisp
 (add-hook 'after-init-hook #'global-flycheck-mode)
 #+end_src
-*** Theming
+*** HTML
 
-Load my preferred theme
+HTML indentation set to 4
 
 #+begin_src emacs-lisp
-(load-theme 'molokai)
+(setq sgml-basic-offset 4)
 #+end_src
