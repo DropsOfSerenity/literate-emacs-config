@@ -303,6 +303,7 @@ Define all the packages we are going to use.
 |----------------------+--------------------------------------------+----------|
 | package              | description                                | anchors  |
 |----------------------+--------------------------------------------+----------|
+| company              | Modular text completion framework          | [[ac]]     |
 | exec-path-from-shell | Make sure path is set properly             |          |
 | magit                | emacs git client                           | [[git]]      |
 | git-gutter           | git gutter                                 | [[git]]      |
@@ -428,10 +429,9 @@ Autopair mode settings
 *** Auto-Complete
 #+NAME: autoc
 
-#+BEGIN_SRC emacs-lisp
-;; (ac-config-default)
-;; (setq ac-auto-show-menu nil)
+Use company for auto competion, globally
 
+#+BEGIN_SRC emacs-lisp
 ;; company mode for all
 (add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
@@ -543,6 +543,7 @@ Syntax Checker enable
 #+begin_src emacs-lisp
 (add-hook 'after-init-hook #'global-flycheck-mode)
 #+end_src
+
 *** HTML
 #+name: html
 
