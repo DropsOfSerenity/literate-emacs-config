@@ -22,12 +22,10 @@ Append a disclaimer to the generated file that it is indeed generated.
 In order to have this file be the emacs initialization file, put the following
 snippet in ~/.emacs.d/init.el file.
 
-#+BEGIN_SRC
 (package-initialize)
 (require 'cl)
 (require 'ob-tangle)
 (org-babel-load-file "~/git/emacs-config/settings.org")
-#+END_SRC
 
 ** General Settings
 
@@ -35,7 +33,7 @@ These are general settings that do not need any third party packages at all.
 
 First change the colorscheme to a default I like.
 #+BEGIN_SRC emacs-lisp
-(load-theme 'deeper-blue)
+(load-theme 'molokai t)
 #+END_SRC
 
 No startup message needed.
@@ -167,16 +165,6 @@ Interactively Do Things
 (ido-mode t)
 #+END_SRC
 
-Why always the harsh scrolling?
-
-#+begin_src emacs-lisp
-(setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-up-aggressively 0
-      scroll-down-aggressively 0
-      scroll-preserve-screen-position 1)
-#+end_src
-
 ** Custom Helper Functions
 
 These are custom helper functions that I may or may not use later
@@ -303,9 +291,10 @@ Define all the packages we are going to use.
 |----------------------+--------------------------------------------+----------|
 | package              | description                                | anchors  |
 |----------------------+--------------------------------------------+----------|
-| company              | Modular text completion framework          | [[ac]]     |
+| company              | Modular text completion framework          | [[ac]]       |
 | exec-path-from-shell | Make sure path is set properly             |          |
 | magit                | emacs git client                           | [[git]]      |
+| magit-gitflow        | git flow for magit                         | [[git]]      |
 | git-gutter           | git gutter                                 | [[git]]      |
 | powerline            | A better mode line                         | [[modeline]] |
 | autopair             | Autopair for parenthesis                   | [[parens]]   |
@@ -344,7 +333,7 @@ Download the packages.
 #+END_SRC
 
 ** Package Configuration
-*** git
+*** QUOTE git
 #+NAME: git
 
 #+BEGIN_SRC emacs-lisp
@@ -354,6 +343,10 @@ Download the packages.
 
 ;; fullscreen magit
 (setq magit-status-buffer-switch-function 'switch-to-buffer)
+
+;; give me git flow or give me death
+(require 'magit-gitflow)
+(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
 #+END_SRC
 
 *** Dash at point
@@ -453,8 +446,9 @@ Use company for auto competion, globally
 ;; grizzl mode for better fuzzy matching
 (setq projectile-completion-system 'grizzl)
 
-;; some keybinds
-; (define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+;; some keybinds for more sublime text-ish like project management
+;; super-f for find file, super-p for switch project and
+;; super-g for grep in project
 (define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
 (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
 (define-key projectile-mode-map [?\s-g] 'projectile-grep)
