@@ -31,11 +31,6 @@ snippet in ~/.emacs.d/init.el file.
 
 These are general settings that do not need any third party packages at all.
 
-First change the colorscheme to a default I like.
-#+BEGIN_SRC emacs-lisp
-(load-theme 'molokai t)
-#+END_SRC
-
 No startup message needed.
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-message t)
@@ -99,8 +94,6 @@ No menu bars, scrolls bars, etc.
 (setq initial-frame-alist
       '((menu-bar-lines . 0)
         (tool-bar-lines . 0)))
-
-(toggle-frame-fullscreen)
 
 #+END_SRC
 
@@ -291,6 +284,7 @@ Define all the packages we are going to use.
 |----------------------+--------------------------------------------+----------|
 | package              | description                                | anchors  |
 |----------------------+--------------------------------------------+----------|
+| molokai-theme        | Molokai color theme                        | [[theme]]    |
 | company              | Modular text completion framework          | [[ac]]       |
 | exec-path-from-shell | Make sure path is set properly             |          |
 | magit                | emacs git client                           | [[git]]      |
@@ -333,7 +327,15 @@ Download the packages.
 #+END_SRC
 
 ** Package Configuration
-*** QUOTE git
+*** Theme
+#+NAME: theme
+
+First change the colorscheme to a default I like.
+#+BEGIN_SRC emacs-lisp
+(load-theme 'molokai t)
+#+END_SRC
+
+*** git
 #+NAME: git
 
 #+BEGIN_SRC emacs-lisp
