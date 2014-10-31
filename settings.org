@@ -22,10 +22,12 @@ Append a disclaimer to the generated file that it is indeed generated.
 In order to have this file be the emacs initialization file, put the following
 snippet in ~/.emacs.d/init.el file.
 
+#+begin_src
 (package-initialize)
 (require 'cl)
 (require 'ob-tangle)
 (org-babel-load-file "~/git/emacs-config/settings.org")
+#+end_src
 
 ** General Settings
 
