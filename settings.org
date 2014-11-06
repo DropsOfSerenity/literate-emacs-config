@@ -213,6 +213,18 @@ Open new line below on C-<return>
 (global-set-key (kbd "C-<return>") 'new-line-below)
 #+end_src
 
+Open new line above on C-S-<return>
+#+begin_src emacs-lisp
+(defun open-line-above ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (newline-and-indent)
+  (previous-line))
+
+(global-set-key (kbd "C-S-<return>") 'open-line-above)
+#+end_src
+
+
 ** Org Mode Settings
 
 I'm generally new to org made and am taking these settings from:
