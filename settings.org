@@ -160,6 +160,15 @@ Interactively Do Things
 (ido-mode t)
 #+END_SRC
 
+highlight TODO/FIXME etc. everywhere
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (font-lock-add-keywords nil
+                                    '(("\\<\\(fixme\\|FIXME\\|todo\\|TODO\\|bug\\|BUG\\):" 1 font-lock-warning-face t)))))
+#+end_src
+
+
 ** Custom Helper Functions
 
 These are custom helper functions that I may or may not use later
@@ -223,7 +232,6 @@ Open new line above on C-S-<return>
 
 (global-set-key (kbd "C-S-<return>") 'open-line-above)
 #+end_src
-
 
 ** Org Mode Settings
 
@@ -346,7 +354,7 @@ Download the packages.
 
 First change the colorscheme to a default I like.
 #+BEGIN_SRC emacs-lisp
-(load-theme 'molokai t)
+; (load-theme 'solarized-dark t)
 #+END_SRC
 
 *** git
