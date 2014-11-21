@@ -168,7 +168,6 @@ highlight TODO/FIXME etc. everywhere
                                     '(("\\<\\(fixme\\|FIXME\\|todo\\|TODO\\|bug\\|BUG\\):" 1 font-lock-warning-face t)))))
 #+end_src
 
-
 ** Custom Helper Functions
 
 These are custom helper functions that I may or may not use later
@@ -202,6 +201,15 @@ line if there is no selection"
     (comment-or-uncomment-region beg end)))
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
 
+(defun beginning-of-line-or-indentation ()
+  "move to the beginning of line, or indentation, and toggle
+between the two"
+  (interactive)
+  (if (bolp)
+      (back-to-indentation)
+    (beginning-of-line)))
+(global-set-key (kbd "C-a") 'beginning-of-line-or-indentation)
+
 (defun eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
   (interactive)
@@ -231,6 +239,18 @@ Open new line above on C-S-<return>
   (previous-line))
 
 (global-set-key (kbd "C-S-<return>") 'open-line-above)
+#+end_src
+
+Function to run ruby file through seeing_is_believe
+
+#+begin_src emacs-lisp
+(defun seeing-is-believing ()
+  "Replace the current region (or the whole buffer, if none) with the output
+of seeing_is_believing."
+  (interactive)
+  (let ((beg (if (region-active-p) (region-beginning) (point-min)))
+        (end (if (region-active-p) (region-end) (point-max))))
+    (shell-command-on-region beg end "seeing_is_believing" nil 'replace)))
 #+end_src
 
 ** Org Mode Settings
@@ -312,7 +332,6 @@ Define all the packages we are going to use.
 | magit                | emacs git client                           | [[git]]      |
 | magit-gitflow        | git flow for magit                         | [[git]]      |
 | git-gutter           | git gutter                                 | [[git]]      |
-| powerline            | A better mode line                         | [[modeline]] |
 | autopair             | Autopair for parenthesis                   | [[parens]]   |
 | smex                 | recently and most frequently used commands | [[smex]]     |
 | undo-tree            | undo tree                                  | [[undo]]     |
@@ -326,10 +345,14 @@ Define all the packages we are going to use.
 | dash-at-point        | Documentation using dash.                  | [[dash]]     |
 | expand-region        | Expand selection                           |          |
 | multiple-cursors     | Sublime Style Multiple Cursors             | [[mc]]       |
+| anaconda-mode        | Anaconda for python                        | [[python]]   |
+| company-anaconda     | Company for anaconda                       | [[python]]   |
 | elpy                 | Emacs Lisp Python Environment              | [[python]]   |
 | ein                  | Emacs IPython Notebook                     | [[python]]   |
 | jedi                 | Python auto-completion for Emacs           | [[python]]   |
 | flycheck-pyflakes    | Pyflakes support for flycheck              | [[python]]   |
+| rinari               | Ruby on rails                              | [[rails]]    |
+| markdown-mode        | Markdown Mode                              | [[markdown]] |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
 | web-mode             | Multiple Modes in HTML                     | [[html]]     |
 | highlight-symbol     | Highlight multiple variable occurences     | [[hl]]       |
@@ -354,7 +377,7 @@ Download the packages.
 
 First change the colorscheme to a default I like.
 #+BEGIN_SRC emacs-lisp
-; (load-theme 'solarized-dark t)
+(load-theme 'solarized-dark t)
 #+END_SRC
 
 *** git
@@ -380,23 +403,6 @@ Documentation using Dash for OSX
 #+begin_src emacs-lisp
 (global-set-key "\C-cd" 'dash-at-point)
 #+end_src
-
-*** Mode line
-#+NAME: modeline
-
-#+BEGIN_SRC emacs-lisp
-(powerline-default-theme)
-(set-face-background 'mode-line "#FF8700")
-(set-face-foreground 'mode-line "#870000")
-
-(set-face-background 'powerline-active1 "#373b41")
-(set-face-foreground 'powerline-active1 "#dcdcdc")
-
-(set-face-background 'powerline-active2 "#282a2e")
-(set-face-foreground 'powerline-active2 "#dcdcdc")
-
-(powerline-reset)
-#+END_SRC
 
 *** Parenthesis
 #+NAME: parens
@@ -503,7 +509,7 @@ selection if we already have a selection
 is already marked"
   (interactive "p")
   (if (region-active-p) ; if we have active mark
-      (mc/mark-next-like-this arg) ; mark next word
+      (mc/mark-next-like-this arg) ; multiple cursor select next word
     (er/expand-region 1)))
 
 (global-set-key (kbd "s-d") 'mark-word-or-select-next)
@@ -540,7 +546,8 @@ Ensure that my environment variables from shell are copied over to emacs
 we're using elpy as a frontend for jedi
 
 #+begin_src emacs-lisp
-(elpy-enable)
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'eldoc-mode)
 #+end_src
 
 *** Javascript
@@ -614,3 +621,5 @@ Highlight matching symbols on given modes
 (add-hook 'python-mode-hook (lambda () (highlight-symbol-mode)))
 (setq highlight-symbol-on-navigation-p t)
 #+end_src
+*** Rails
+#+name: rails
