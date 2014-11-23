@@ -344,6 +344,9 @@ Define all the packages we are going to use.
 | grizzl               | Fuzzy Search Utils                         |          |
 | dash-at-point        | Documentation using dash.                  | [[dash]]     |
 | expand-region        | Expand selection                           |          |
+| perspective          |                                            |          |
+| persp-projectile     |                                            |          |
+| js2-mode             | Enhanced Javascript Mode                   | [[js]]       |
 | multiple-cursors     | Sublime Style Multiple Cursors             | [[mc]]       |
 | anaconda-mode        | Anaconda for python                        | [[python]]   |
 | company-anaconda     | Company for anaconda                       | [[python]]   |
@@ -476,10 +479,15 @@ Use company for auto competion, globally
 ;; grizzl mode for better fuzzy matching
 (setq projectile-completion-system 'grizzl)
 
+;; use perspective mode for clean buffer list
+(persp-mode)
+(require 'persp-projectile)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
+
 ;; some keybinds for more sublime text-ish like project management
 ;; super-f for find file, super-p for switch project and
 ;; super-g for grep in project
-(define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+;; (define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
 (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
 (define-key projectile-mode-map [?\s-g] 'projectile-grep)
 #+end_src
@@ -551,13 +559,25 @@ we're using elpy as a frontend for jedi
 #+end_src
 
 *** Javascript
+#+name: js
 
-Javascript confs
+Use js2-mode
+
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+#+end_src
+
+
+Enable flycheck mode in js-mode
 
 #+begin_src emacs-lisp
 (require 'flycheck)
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
+#+end_src
+
+#+begin_src emacs-lisp
+(setq-local electric-layout-rules '((?\; . after)))
 #+end_src
 
 *** Flycheck
