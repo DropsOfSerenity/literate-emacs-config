@@ -82,6 +82,27 @@ Make sure font lock mode is enabled for all buffers
 (global-font-lock-mode t)
 #+END_SRC
 
+Line numbers everywhere
+
+#+begin_src emacs-lisp
+(global-linum-mode 1)
+(unless window-system
+  (add-hook 'linum-before-numbering-hook
+        (lambda ()
+          (setq-local linum-format-fmt
+              (let ((w (length (number-to-string
+                        (count-lines (point-min) (point-max))))))
+                (concat "%" (number-to-string w) "d"))))))
+
+(defun linum-format-func (line)
+  (concat
+   (propertize (format linum-format-fmt line) 'face 'linum)
+   (propertize " " 'face 'mode-line)))
+
+(unless window-system
+  (setq linum-format 'linum-format-func))
+#+end_src
+
 No menu bars, scrolls bars, etc.
 
 #+BEGIN_SRC emacs-lisp
@@ -357,6 +378,7 @@ Define all the packages we are going to use.
 | rinari               | Ruby on rails                              | [[rails]]    |
 | markdown-mode        | Markdown Mode                              | [[markdown]] |
 | coffee-mode          | Coffee Support                             | [[coffee]]   |
+| emmet-mode           | Emmet Mode                                 | [[html]]     |
 | web-mode             | Multiple Modes in HTML                     | [[html]]     |
 | highlight-symbol     | Highlight multiple variable occurences     | [[hl]]       |
 |----------------------+--------------------------------------------+----------|
@@ -388,7 +410,7 @@ First change the colorscheme to a default I like.
 
 #+BEGIN_SRC emacs-lisp
 (global-git-gutter-mode t)
-
+(git-gutter:linum-setup)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; fullscreen magit
@@ -627,6 +649,10 @@ Web Mode for HTML
 (setq web-mode-ac-sources-alist
   '(("css" . (ac-source-css-property))
     ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+
+;; use emmet-mode in web-mode
+(add-hook 'web-mode-hook 'emmet-mode)
+
 #+end_src
 *** Highlight Symbol
 #+name: hl
